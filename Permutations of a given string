@@ -1,0 +1,31 @@
+	// https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1?page=1&category[]=Recursion&sortBy=submissions
+  vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    if(S.size() == 1) return  { S };
+		    vector<string> smallans = find_permutation(S.substr(1));
+		    string temp = S.substr(1);
+		    vector<string> ans;
+		    for(int i =0 ; i < (int)smallans.size(); ++i) {
+		        
+		        for(int j = 0; j <= (int)temp.size(); ++j ) {
+
+
+		         string curr = smallans[i].substr(0,j) + S[0] +   smallans[i].substr(j,temp.size() - j);    
+		         ans.push_back(curr);
+		        }
+		        
+		    }
+		    // l to r => r - l + 1
+		    // (1 to r) - (1 to  l -1) = > r - (l - 1) = > r - l + 1
+		  
+		    sort(ans.begin(),ans.end());
+		    set<string> s;
+		    s.insert(ans.begin(),ans.end());
+		    vector<string> nv;
+		    for(auto x: s) nv.push_back(x);
+		    
+		    return nv;
+		    
+		    
+		}
