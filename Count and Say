@@ -1,0 +1,33 @@
+class Solution {
+public:
+    
+    
+    string countAndSay(int n) {
+     
+        
+      
+        
+        if(n == 1) return "1";
+        string curr = countAndSay(n-1);
+          
+            int sz = curr.size();
+            string nstr = "";
+            for(int i =0; i < sz;  ) {
+                
+                int j = i;
+                
+                while(j < sz && curr[i] == curr[j]) {
+                    ++j;
+                }
+                int freq = j - i;
+                nstr += to_string(freq);
+                nstr += curr[i];
+                i = j;
+                
+            }
+            
+          
+        return nstr;
+        
+    }
+};
