@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+  // DEBUGGING SECTION 
+void __print(int x) {cerr << x;}
+void __print(long long x) {cerr << x;}
+void __print(double x) {cerr << x;}
+void __print(long double x) {cerr << x;}
+void __print(char x) {cerr << '\'' << x << '\'';}
+void __print(const string &x) {cerr << '\"' << x << '\"';}
+void __print(bool x) {cerr << (x ? "true" : "false");}
+template<typename T, typename V>
+void __print(const pair<T, V> &x) {cerr << '{'; __print(x.first); cerr << ','; __print(x.second); cerr << '}';}
+template<typename T>
+void __print(const T &x) {int f = 0; cerr << '{'; for (auto &i : x) cerr << (f++ ? "," : ""), __print(i); cerr << "}";}
+void _print() {cerr << "]\n";}
+template <typename T, typename... V>
+void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v...);}
+ 
+#define dbg(x...) cerr << "[" << #x << "] = ["; _print(x)
+
+string ori;
+void rec(int idx,string inp, string out, bool prefixequal) {
+    
+    
+    if(idx == ori.size()) {
+        
+        if(prefixequal == true)
+        cout << out << endl;
+        return ;
+    }
+    
+    
+    for(int i  = 0; i < (int)inp.size(); ++i) {
+        
+        char ch = inp[i];
+       dbg(idx,ch,prefixequal,inp,out);
+        // i + 1 se  n - 1  => n - 1 - i - 1 + 1
+        string ns = inp.substr(0,i) + inp.substr(i+1);
+        
+        if(prefixequal == true) {
+            
+            rec(idx+1,ns,out + ch, true);
+            
+        } else {
+            
+            if(ch == ori[idx] || ch > ori[idx]) {
+                
+                    rec( idx+1,ns , out + ch, (ch == ori[idx] ? false : true) );
+             
+            }
+            
+        }
+           
+    }
+    
+    
+}
+
+
+int main() {
+    
+   string inp;
+   cin >> inp;
+    ori = inp;
+   sort(inp.begin(),inp.end());
+ 
+   rec(0,inp,"",false);
+    
+}
+ 
